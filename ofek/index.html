@@ -1,21 +1,609 @@
 <!DOCTYPE html>
-<html>
-    <head>
-    <meta charset="utf-8">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>gamon invasion</title>
-        <style>
-        </style>
-    </head>
-    <body>
-        <div id="sketch-holder">
-            <!-- Our sketch will go here! -->
-          </div>
-        <div>
-        <button type="button" id="btnNewGame" onclick="resetGame();">New Game</button></div>
-    </body>
-    <script src="p5.min.js"></script>
-    <script src="p5.play.js"></script>    
-    <script src="p5.sound.min.js"></script>
-    <script src="sketch.js"></script>
+    <title>Ofek, Gaming Geek — libalabs.com/ofek</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --gold: #d4a853;
+            --gold-dark: #b8862d;
+            --gold-light: #e8c87a;
+            --blue: #2e6b8a;
+            --blue-deep: #1a3f52;
+            --blue-dark: #0f2a38;
+            --black: #0a0a0f;
+            --green-glow: #3eff6e;
+            --green-dim: #2a8a4a;
+            --parchment: #d9c8a4;
+            --parchment-light: #e8dbbf;
+            --parchment-dark: #c4b28f;
+            --text-dark: #1a1a1a;
+            --text-light: #e8e0d0;
+            --text-muted: #a09880;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'EB Garamond', Georgia, serif;
+            background: var(--black);
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(46, 107, 138, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(62, 255, 110, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(212, 168, 83, 0.06) 0%, transparent 60%),
+                var(--black);
+            z-index: -1;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(180deg, rgba(10, 10, 15, 0.95), transparent);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        .nav-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 0.05em;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-decoration: none;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover { color: var(--gold); }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(46, 107, 138, 0.12), transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-ornament {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 0.04em;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero h1 span {
+            display: block;
+            font-size: 0.4em;
+            font-weight: 400;
+            color: var(--text-muted);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-top: 0.75rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .hero-subtitle {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--text-muted);
+            max-width: 500px;
+            margin: 1.5rem auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-primary {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.9rem 2rem;
+            background: linear-gradient(135deg, var(--blue-deep), var(--blue));
+            color: var(--text-light);
+            text-decoration: none;
+            border: 1px solid var(--gold-dark);
+            border-radius: 4px;
+            letter-spacing: 0.08em;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--blue), var(--blue-deep));
+            box-shadow: 0 0 20px rgba(46, 107, 138, 0.4);
+        }
+
+        .btn-secondary {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.9rem 2rem;
+            background: transparent;
+            color: var(--gold);
+            text-decoration: none;
+            border: 1px solid var(--gold-dark);
+            border-radius: 4px;
+            letter-spacing: 0.08em;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(212, 168, 83, 0.1);
+            box-shadow: 0 0 15px rgba(212, 168, 83, 0.2);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.4;
+        }
+
+        .scroll-indicator span {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 30px;
+            background: linear-gradient(180deg, var(--gold-dark), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--green-dim);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.75rem, 4vw, 2.25rem);
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 0.03em;
+        }
+
+        .section-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--gold-dark);
+            margin: 1rem auto 0;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: linear-gradient(180deg, rgba(26, 31, 40, 0.8), rgba(15, 20, 30, 0.9));
+            border: 1px solid rgba(212, 168, 83, 0.2);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .service-card:hover {
+            border-color: rgba(212, 168, 83, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(212, 168, 83, 0.08);
+        }
+
+        .service-card:hover::before { opacity: 1; }
+
+        .service-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            border: 2px solid;
+            font-size: 1.4rem;
+        }
+
+        .service-card:nth-child(1) .service-icon {
+            background: linear-gradient(135deg, rgba(46, 107, 138, 0.2), rgba(26, 63, 82, 0.4));
+            border-color: var(--blue);
+        }
+
+        .service-card:nth-child(2) .service-icon {
+            background: linear-gradient(135deg, rgba(212, 168, 83, 0.2), rgba(184, 134, 45, 0.4));
+            border-color: var(--gold);
+        }
+
+        .service-card:nth-child(3) .service-icon {
+            background: linear-gradient(135deg, rgba(139, 74, 138, 0.2), rgba(90, 45, 90, 0.4));
+            border-color: #8b4a8a;
+        }
+
+        .service-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.02em;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+        }
+
+        .service-tag {
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.4rem 0.75rem;
+            background: rgba(46, 107, 138, 0.15);
+            color: var(--blue);
+            border-radius: 3px;
+            border-left: 2px solid var(--blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+        }
+
+        .service-link:hover {
+            color: var(--gold-light);
+            gap: 0.75rem;
+        }
+
+        .service-link::after {
+            content: '→';
+            transition: transform 0.3s ease;
+        }
+
+        /* About Section */
+        .about {
+            background: linear-gradient(180deg, rgba(26, 31, 40, 0.4), transparent);
+            border: 1px solid rgba(212, 168, 83, 0.15);
+            border-radius: 8px;
+            padding: 3rem;
+            margin: 2rem auto;
+            max-width: 700px;
+            text-align: center;
+        }
+
+        .about-quote {
+            font-family: 'EB Garamond', serif;
+            font-style: italic;
+            font-size: 1.35rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+        }
+
+        .about-source {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(212, 168, 83, 0.15);
+            margin-top: 4rem;
+        }
+
+        .footer-url {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: var(--green-glow);
+            text-decoration: none;
+            letter-spacing: 0.08em;
+            transition: all 0.3s ease;
+        }
+
+        .footer-url:hover {
+            text-shadow: 0 0 12px var(--green-glow);
+        }
+
+        .footer-copy {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.25s; }
+        .stagger-3 { transition-delay: 0.4s; }
+
+        .contact-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .contact-link {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+        }
+        .contact-link:hover { color: var(--gold); }
+        .contact-divider { color: var(--text-muted); }
+
+        /* Mobile Nav Toggle */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--gold);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .services-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            section { padding: 3.5rem 1.5rem; }
+        }
+
+        @media (max-width: 640px) {
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }
+            .hero h1 { font-size: 2rem; }
+            .hero-subtitle { font-size: 1.05rem; }
+            .hero-cta { flex-direction: column; gap: 0.75rem; }
+            .about { padding: 2rem 1.5rem; }
+            .service-card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#" class="nav-logo">OFEK</a>
+        <ul class="nav-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+        <button class="nav-toggle" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-ornament"></div>
+        <h1>
+            Ofek, Gaming Geek
+            <span>Strategy · Community · Tabletop</span>
+        </h1>
+        <p class="hero-subtitle">
+            A young man with an addictive passion for strategy games.
+            Learn, play, and discover your next obsession.
+        </p>
+        <div class="hero-cta">
+            <a href="#services" class="btn-primary">Choose One</a>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </header>
+
+    <section id="services">
+        <div class="section-header fade-in">
+            <div class="section-label">Available Modes</div>
+            <h2 class="section-title">Choose One</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="services-grid">
+            <div class="service-card fade-in stagger-1">
+                <div class="service-icon">📚</div>
+                <h3>Learn to Play MTG</h3>
+                <p>New to the game? Start your journey here. Learn the rules, build your first deck, and discover the strategy that keeps players coming back for more.</p>
+                <div class="service-tag">Effect: Draw three cards</div>
+                <a href="#" class="service-link">Begin Learning</a>
+            </div>
+            <div class="service-card fade-in stagger-2">
+                <div class="service-icon">🎂</div>
+                <h3>Run a Draft Birthday</h3>
+                <p>Celebrate with a twist. Host a draft birthday party with custom packs, competitive vibes, and enough treasure to last the entire night.</p>
+                <div class="service-tag">Effect: Create three Treasure tokens</div>
+                <a href="#" class="service-link">Start Drafting</a>
+            </div>
+            <div class="service-card fade-in stagger-3">
+                <div class="service-icon">🐉</div>
+                <h3>Sign Up for D&D</h3>
+                <p>Trade your mana for dice rolls. Join an ongoing campaign, create your character, and counter whatever the DM throws at you.</p>
+                <div class="service-tag">Effect: Counter target spell</div>
+                <a href="https://gamelandia.fun/products/saturday-teen-dungeons-dragons" class="service-link">Join Campaign</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="about fade-in">
+            <p class="about-quote">
+                "A young man with an addictive passion for strategy games."
+            </p>
+            <span class="about-source">— The Phyrexian Scriptures</span>
+        </div>
+    </section>
+
+    <footer>
+        <div class="contact-row">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ofekliba@gmail.com" target="_blank" rel="noopener" class="contact-link">ofekliba@gmail.com</a>
+        </div>
+        <a href="https://libalabs.com/ofek" class="footer-url">libalabs.com/ofek</a>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
 </html>

@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orly Liba</title>
+  <meta name="description" content="Orly Liba — Applied Machine Learning Tech Lead across video generation and editing (YouTube) and computational photography (Google Research). Currently working on AI for Science at Google DeepMind. Stanford EE PhD on optical and computational tools for medical imaging." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=5" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --text-secondary: #333333;
+      --text-muted: #666666;
+      --border: #e6e6e6;
+      --border-light: #f0f0f0;
+      --accent: #ff8800;
+      --accent-hover: #e07600;
+      --accent-soft: rgba(255, 136, 0, 0.1);
+      --font-main: 'Lato', Verdana, Helvetica, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      font-size: 16px;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    a:hover {
+      color: var(--accent-hover);
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+
+    /* ================= HERO / BIO ================= */
+    .hero {
+      padding-bottom: 36px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 215px 1fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .hero-avatar-wrap {
+      width: 215px;
+      height: 215px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #ffffff;
+      flex-shrink: 0;
+    }
+
+    .hero-avatar {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-name {
+      font-family: var(--font-main);
+      font-size: 34px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .hero-bio {
+      font-family: var(--font-main);
+      font-size: 16.5px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.62;
+      margin-bottom: 18px;
+    }
+
+    .hero-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .icon-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      color: var(--accent);
+      background: transparent;
+      border: none;
+      transition: transform 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+      text-decoration: none !important;
+    }
+
+    .icon-link:hover {
+      color: var(--accent-hover);
+      transform: translateY(-1px) scale(1.06);
+    }
+
+    .icon-link .icon {
+      width: 27px;
+      height: 27px;
+    }
+
+    .icon-link .icon-img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* ================= SECTIONS ================= */
+    .section {
+      padding-top: 36px;
+    }
+
+    .section + .section {
+      margin-top: 36px;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-family: var(--font-main);
+      font-size: 23px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 22px;
+    }
+
+    /* ================= TIMELINE (KARPATHY-STYLE) ================= */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tl-item {
+      display: grid;
+      grid-template-columns: 152px 60px 1fr;
+      gap: 0 14px;
+      position: relative;
+    }
+
+    .tl-time {
+      text-align: right;
+      padding-top: 12px;
+    }
+
+    .tl-date {
+      font-family: var(--font-main);
+      font-size: 13.5px;
+      font-weight: 400;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .tl-marker {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .tl-logo {
+      width: 52px;
+      height: 48px;
+      background: #ffffff;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      z-index: 2;
+      padding: 2px;
+      overflow: hidden;
+    }
+
+    .tl-logo-img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .tl-line {
+      width: 2px;
+      background: var(--border);
+      flex-grow: 1;
+      margin: 4px 0;
+    }
+
+    .tl-body {
+      padding-top: 4px;
+      padding-bottom: 34px;
+      min-width: 0;
+    }
+
+    .tl-item:last-child .tl-body {
+      padding-bottom: 8px;
+    }
+
+    .tl-header {
+      margin-bottom: 6px;
+    }
+
+    .tl-role {
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    .tl-role em {
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    .tl-org {
+      font-size: 14.5px;
+      font-weight: 400;
+      color: var(--accent);
+      margin-top: 1px;
+    }
+
+    .tl-desc {
+      font-size: 15.5px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .tl-desc + .tl-desc {
+      margin-top: 8px;
+    }
+
+    /* Embedded Projects inside Timeline */
+    .tl-projects {
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .project-card {
+      display: grid;
+      grid-template-columns: 128px 1fr;
+      gap: 14px;
+      padding: 10px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      align-items: center;
+      transition: border-color 0.15s ease;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+    }
+
+    .project-thumb-wrap {
+      width: 128px;
+      height: 82px;
+      border-radius: 5px;
+      overflow: hidden;
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      cursor: zoom-in;
+      flex-shrink: 0;
+    }
+
+    .project-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 3px;
+      line-height: 1.35;
+    }
+
+    .project-summary {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 5px;
+    }
+
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .project-links a {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* ================= TEACHING & SPEAKING + VIDEOS ================= */
+    .teaching-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .teach-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .teach-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+
+    .teach-desc {
+      font-size: 14.5px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .videos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .video-card {
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      text-decoration: none !important;
+      color: inherit;
+      transition: border-color 0.15s ease;
+    }
+
+    .video-card:hover {
+      border-color: var(--accent);
+    }
+
+    .video-thumb-wrap {
+      position: relative;
+      width: 100%;
+      height: 210px;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .video-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .video-play-Btn {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .video-body {
+      padding: 14px 18px 16px;
+    }
+
+    .video-title {
+      font-size: 15.5px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+
+    .video-card:hover .video-title {
+      color: var(--accent);
+    }
+
+    .video-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ================= HOBBIES & CAROUSEL ================= */
+    .hobbies-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .hobby-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 290px;
+      background: #fafafa;
+      border-bottom: 1px solid var(--border-light);
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .carousel-track {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .carousel-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 25%;
+      display: block;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+      cursor: zoom-in;
+    }
+
+    .carousel-slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.88);
+      color: #111111;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 5;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .carousel-btn:hover {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .carousel-btn.prev {
+      left: 10px;
+    }
+
+    .carousel-btn.next {
+      right: 10px;
+    }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 5;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 4px 8px;
+      border-radius: 12px;
+    }
+
+    .carousel-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.55);
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    .carousel-dot.active {
+      background: var(--accent);
+      transform: scale(1.2);
+    }
+
+    .hobby-body {
+      padding: 16px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .hobby-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .hobby-desc {
+      font-size: 14.5px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    /* ================= LIGHTBOX ================= */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease;
+    }
+
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-img {
+      max-width: min(960px, 92vw);
+      max-height: 80vh;
+      border-radius: 6px;
+      object-fit: contain;
+      background: #ffffff;
+    }
+
+    .lightbox-caption {
+      margin-top: 12px;
+      color: #f0f0f0;
+      font-size: 14px;
+      text-align: center;
+      max-width: 680px;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 18px;
+      right: 24px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      font-size: 26px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .lightbox-close:hover {
+      background: var(--accent);
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 760px) {
+      .container {
+        padding: 32px 18px 60px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 18px;
+      }
+
+      .hero-avatar-wrap {
+        margin: 0 auto;
+        width: 175px;
+        height: 175px;
+      }
+
+      .hero-links {
+        justify-content: center;
+      }
+
+      .tl-item {
+        grid-template-columns: 48px 1fr;
+        gap: 0 12px;
+      }
+
+      .tl-time {
+        grid-column: 2;
+        text-align: left;
+        padding-top: 0;
+        margin-bottom: 2px;
+      }
+
+      .tl-marker {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+      }
+
+      .tl-logo {
+        width: 44px;
+        height: 44px;
+      }
+
+      .tl-body {
+        grid-column: 2;
+        padding-top: 0;
+      }
+
+      .project-card {
+        grid-template-columns: 1fr;
+      }
+
+      .project-thumb-wrap {
+        width: 100%;
+        height: 150px;
+      }
+
+      .teaching-grid,
+      .videos-grid,
+      .hobbies-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container">
+    <!-- Hero / Bio -->
+    <section class="hero" id="top">
+      <div class="hero-grid">
+        <div class="hero-avatar-wrap">
+          <img src="assets/images/orly-profile.jpg" alt="Orly Liba" class="hero-avatar" />
+        </div>
+        <div class="hero-content">
+          <h1 class="hero-name">Orly Liba</h1>
+          <p class="hero-bio">
+            Applied Machine Learning Tech Lead with extensive experience launching innovative, cross-functional projects across AI for Science (Google DeepMind), video generation and editing (YouTube), and computational photography (Google Research). Stanford EE PhD on optical and computational tools for medical imaging.
+          </p>
+          <div class="hero-links" aria-label="External profiles">
+            <a href="https://scholar.google.com/citations?user=wvVg44gAAAAJ&hl=en" target="_blank" rel="noopener" class="icon-link" title="Google Scholar" aria-label="Google Scholar">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
+              </svg>
+            </a>
+            <a href="https://github.com/orlyliba" target="_blank" rel="noopener" class="icon-link" title="GitHub" aria-label="GitHub">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+              </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/orlyliba/" target="_blank" rel="noopener" class="icon-link" title="LinkedIn" aria-label="LinkedIn">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+              </svg>
+            </a>
+            <a href="http://www.libalabs.com/" target="_blank" rel="noopener" class="icon-link" title="LibaLabs" aria-label="LibaLabs">
+              <img src="assets/images/logos/libalabs-bulb.png" alt="LibaLabs" class="icon-img" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="section" id="timeline">
+      <div class="timeline">
+
+        <!-- 1. Google DeepMind (Sep 2026 - Present) -->
+        <article class="tl-item">
+          <div class="tl-time">
+            <span class="tl-date">Sep 2026 – Present</span>
+          </div>
+          <div class="tl-marker">
+            <div class="tl-logo" title="Google DeepMind">
+              <svg viewBox="0 0 192 192" width="36" height="36" aria-label="Google DeepMind">
+                <path fill="#4285F4" d="M133.52,16.39C122.52,11.17,109.43,8,97,8C59.48,8,37.04,39.06,39.45,69.4c1.09,13.73,7.83,27.02,18.98,37.4c4.14,3.84,8.62,7.04,13.26,9.53c-3.58-4.25-6.04-9.47-6.98-15.19c-2.49-15.25,7.57-37.69,33.29-37.69c27.66,0,58.14,26.31,60.69,58.64c1.58,19.77-5.93,37.61-18.6,50.04C166.37,156.9,184,128.5,184,96C184,60.83,163.35,30.47,133.52,16.39z"/>
+                <path fill="#1A73E8" d="M152.55,122.6c-1.09-13.73-7.83-27.02-18.98-37.4c-4.14-3.84-8.62-7.04-13.26-9.53c3.58,4.25,6.04,9.47,6.98,15.19c2.49,15.25-7.57,37.69-33.29,37.69c-27.66,0-58.14-26.31-60.69-58.64c-1.58-19.77,5.93-37.61,18.6-50.04C25.63,35.1,8,63.5,8,96c0,35.17,20.65,65.53,50.48,79.61c11,5.22,24.08,8.39,36.52,8.39C132.52,184,154.96,152.94,152.55,122.6z"/>
+              </svg>
+            </div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-body">
+            <div class="tl-header">
+              <h3 class="tl-role">Senior Staff Software Engineer, Tech Lead</h3>
+              <div class="tl-org">Google DeepMind &middot; Science and Strategic Initiatives (SSI)</div>
+            </div>
+            <p class="tl-desc">
+              Founding technical lead for the Self-Improving Meta Agent team in Google DeepMind's Science and Strategic Initiatives (SSI) organization. Accelerating scientific discovery and enterprise adoption by improving the usability, efficiency, reliability, and quality of scientific models and agents, including AlphaEvolve, AlphaGenome, and more.
+            </p>
+          </div>
+        </article>
+
+        <!-- 2. YouTube (Jun 2023 - Sep 2026) -->
+        <article class="tl-item">
+          <div class="tl-time">
+            <span class="tl-date">Jun 2023 – Sep 2026</span>
+          </div>
+          <div class="tl-marker">
+            <div class="tl-logo" title="YouTube">
+              <svg viewBox="0 0 32 32" width="36" height="36" aria-label="YouTube">
+                <path fill="#FF0000" d="M29.41 9.26a3.5 3.5 0 0 0-2.47-2.47C24.76 6.2 16 6.2 16 6.2s-8.76 0-10.94.59a3.5 3.5 0 0 0-2.47 2.47A36.13 36.13 0 0 0 2 16a36.13 36.13 0 0 0 .59 6.74 3.5 3.5 0 0 0 2.47 2.47c2.18.59 10.94.59 10.94.59s8.76 0 10.94-.59a3.5 3.5 0 0 0 2.47-2.47A36.13 36.13 0 0 0 30 16a36.13 36.13 0 0 0-.59-6.74Z"/>
+                <path fill="#FFFFFF" d="m13.2 20.2 7.27-4.2-7.27-4.2v8.4Z"/>
+              </svg>
+            </div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-body">
+            <div class="tl-header">
+              <h3 class="tl-role">Senior Staff Software Engineer &amp; Research Scientist, Tech Lead</h3>
+              <div class="tl-org">YouTube Shorts &middot; Google</div>
+            </div>
+            <p class="tl-desc">
+              Technical lead for the Advanced Capabilities team in YouTube Shorts (applied ML, ~30 people; 7/2025 – 9/2026) and Research Scientist, Tech Lead for video generation in the Capabilities team (6/2023 – 7/2025). Collaborated with Google DeepMind on developing video generation models (evolving from Phenaki to Veo and Omni) to empower creators on the YouTube platform, scaling impact to &gt;1.5M uploads per day. Pioneered agentic workflows for video editing and creation. Notable projects include Dream Screen, AI Playground, AI Remix, and Conversational Editing.
+            </p>
+            <div class="tl-projects">
+              <div class="project-card">
+                <div class="project-thumb-wrap">
+                  <img src="assets/images/projects/gemini-omni.svg" alt="Gemini Omni launch at Google I/O for YouTube Shorts" class="project-thumb" loading="lazy" />
+                </div>
+                <div class="project-info">
+                  <h4 class="project-title">Gemini Omni</h4>
+                  <p class="project-summary">
+                    Partnered with Google DeepMind to develop and launch Gemini Omni in YouTube Shorts, powering AI Remix and Dreamscreen.
+                  </p>
+                  <div class="project-links">
+                    <a href="https://deepmind.google/models/gemini-omni/" target="_blank" rel="noopener">Gemini Omni at Google I/O ↗</a>
+                  </div>
+                </div>
+              </div>
+              <div class="project-card">
+                <div class="project-thumb-wrap">
+                  <img src="assets/images/projects/veo-youtube-shorts.png" alt="Google DeepMind Veo &amp; Imagen 3 in YouTube Dream Screen" class="project-thumb" loading="lazy" />
+                </div>
+                <div class="project-info">
+                  <h4 class="project-title">Veo for AI Playground &amp; Imagen 3</h4>
+                  <p class="project-summary">
+                    Generative creation tools for YouTube Shorts.
+                  </p>
+                  <div class="project-links">
+                    <a href="https://blog.youtube/news-and-events/made-on-youtube-2024/" target="_blank" rel="noopener">Made on YouTube 2024 ↗</a>
+                    <a href="https://blog.youtube/news-and-events/dream-screen-veo-update/" target="_blank" rel="noopener">Veo Launch Blog ↗</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. Google Research (Jan 2018 - Jun 2023) -->
+        <article class="tl-item">
+          <div class="tl-time">
+            <span class="tl-date">Jan 2018 – Jun 2023</span>
+          </div>
+          <div class="tl-marker">
+            <div class="tl-logo" title="Google Research">
+              <img src="assets/images/logos/google-research-icon.png" alt="Google Research" class="tl-logo-img" />
+            </div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-body">
+            <div class="tl-header">
+              <h3 class="tl-role">Research Scientist, Tech Lead &amp; Manager</h3>
+              <div class="tl-org">Google Research &middot; GCam, AI Perception</div>
+            </div>
+            <p class="tl-desc">
+              Tech lead, manager (6/2020 – 6/2023), and developer of computational photography and computer vision algorithms for the Pixel phone and Google Photos. Core contributor to Night Sight (Pixel phone, since 2018), development of sky effects: Sky optimization for astrophotography (Pixel 2019) and Sky Palette transfer (2020), TL and IC for monocular depth (Cinematic Photos 2020, Bokeh 2022), Co-TL of Magic Eraser (Google Photos, since 2021), and TL for Camouflage and the G1 launch.
+            </p>
+            <div class="tl-projects">
+              <div class="project-card">
+                <div class="project-thumb-wrap">
+                  <img src="assets/images/projects/magic-eraser.png" alt="Magic Eraser in Google Photos on Pixel 6" class="project-thumb" loading="lazy" />
+                </div>
+                <div class="project-info">
+                  <h4 class="project-title">Magic Eraser on Pixel 6 &amp; Google Photos</h4>
+                  <p class="project-summary">
+                    Automatic distraction detection, instance segmentation, and on-device generative image inpainting for removing photobombers, power lines, and unwanted objects in Google Photos.
+                  </p>
+                  <div class="project-links">
+                    <a href="https://blog.google/products/pixel/magic-eraser/" target="_blank" rel="noopener">Google Keyword Blog ↗</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="project-card">
+                <div class="project-thumb-wrap">
+                  <img src="assets/images/projects/night-sight.png" alt="Night Sight Low-Light Photography on Pixel" class="project-thumb" loading="lazy" />
+                </div>
+                <div class="project-info">
+                  <h4 class="project-title">Handheld Mobile Photography in Very Low Light (Night Sight)</h4>
+                  <p class="project-summary">
+                    SIGGRAPH Asia 2019 paper and flagship Pixel camera feature introducing burst alignment, motion metering, and learning-based white balance for handheld photography down to 0.3 lux.
+                  </p>
+                  <div class="project-links">
+                    <a href="https://dl.acm.org/doi/10.1145/3355089.3356508" target="_blank" rel="noopener">SIGGRAPH Asia 2019 Paper ↗</a>
+                    <a href="https://research.google/blog/night-sight-seeing-in-the-dark-on-pixel-phones/" target="_blank" rel="noopener">Google Research Blog ↗</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="project-card">
+                <div class="project-thumb-wrap">
+                  <img src="assets/images/projects/astrophotography.jpg" alt="Astrophotography mode captured on Pixel" class="project-thumb" loading="lazy" />
+                </div>
+                <div class="project-info">
+                  <h4 class="project-title">Astrophotography &amp; Sky Optimization on Pixel 4</h4>
+                  <p class="project-summary">
+                    Long-exposure multi-frame sky segmentation, dark-current noise suppression, and star-trail prevention enabling mobile phones to photograph the Milky Way.
+                  </p>
+                  <div class="project-links">
+                    <a href="https://research.google/blog/astrophotography-with-night-sight-on-pixel-phones/" target="_blank" rel="noopener">Google Research Blog ↗</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. Apple (Jun - Sep 2017) -->
+        <article class="tl-item">
+          <div class="tl-time">
+            <span class="tl-date">Jun – Sep 2017</span>
+          </div>
+          <div class="tl-marker">
+            <div class="tl-logo" title="Apple">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="#111111" aria-label="Apple">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.33c.64-.78 1.08-1.86.96-2.94-.93.04-2.06.62-2.72 1.4-.58.68-1.1 1.79-.96 2.84 1.04.08 2.08-.52 2.72-1.3z"/>
+              </svg>
+            </div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-body">
+            <div class="tl-header">
+              <h3 class="tl-role">Algorithms Software Engineer Intern</h3>
+              <div class="tl-org">Apple &middot; Camera Software</div>
+            </div>
+            <p class="tl-desc">
+              Research and development of computational imaging algorithms in the camera software group.
+            </p>
+          </div>
+        </article>
+
+        <!-- 5. Stanford PhD & Stanford Ignite (Nov 2012 - Mar 2018) -->
+        <article class="tl-item">
+          <div class="tl-time">
+            <span class="tl-date">Nov 2012 – Mar 2018</span>
+          </div>
+          <div class="tl-marker">
+            <div class="tl-logo" title="Stanford University">
+              <img src="assets/images/logos/stanford.png" alt="Stanford University" class="tl-logo-img" />
+            </div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-body">
+            <div class="tl-header">
+              <h3 class="tl-role">Ph.D. in Electrical Engineering &amp; Stanford Ignite</h3>
+              <div class="tl-org">Stanford University</div>
+            </div>
+            <p class="tl-desc">
+              Dissertation: <em>Optical and Computational Tools for Medical Imaging</em> (advised by Prof. Adam de la Zerda; Research Assistant at Stanford School of Medicine, 11/2012 – 12/2017; Ph.D., 9/2013 – 3/2018, GPA 4.2/4.0). First lab member; developed optical design, signal processing, computer vision, and machine learning tools for optical coherence tomography (OCT) and hyperspectral microscopy, publishing 4 first-author journal papers.
+            </p>
+            <p class="tl-desc">
+              <strong>Stanford Ignite</strong> (Graduate School of Business, Jun – Jul 2016): Completed a certificate program providing business fundamentals for entrepreneurship, working with a small team to develop a business model and commercialization plan for one of my PhD medical imaging projects.
+            </p>
+
+            <div class="tl-projects">
+              <div class="project-card">
+                <div class="project-thumb-wrap">
+                  <img src="assets/images/projects/sm-oct-fingertip.png" alt="Speckle-Modulating OCT high-resolution imaging" class="project-thumb" loading="lazy" />
+                </div>
+                <div class="project-info">
+                  <h4 class="project-title">Speckle-Modulating OCT (SM-OCT)</h4>
+                  <p class="project-summary">
+                    Eliminated coherent speckle noise in Optical Coherence Tomography using a diffusing element, revealing cellular-scale structures in living tissue and the human retina.
+                  </p>
+                  <div class="project-links">
+                    <a href="https://www.nature.com/articles/s41467-017-00839-3" target="_blank" rel="noopener">Nature Communications 2017 ↗</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="project-card">
+                <div class="project-thumb-wrap">
+                  <img src="assets/images/projects/mozart-brain-nanorods.gif" alt="MOZART functional lymph and brain vessel OCT imaging with gold nanorods" class="project-thumb" loading="lazy" />
+                </div>
+                <div class="project-info">
+                  <h4 class="project-title">MOZART: Contrast-Enhanced Spectral OCT with Large Gold Nanorods</h4>
+                  <p class="project-summary">
+                    Engineered large gold nanorods and spectral signal reconstruction for non-invasive 3D visualization of lymphatic drainage, valve function, and tumor microvasculature in vivo.
+                  </p>
+                  <div class="project-links">
+                    <a href="https://www.nature.com/articles/srep23322" target="_blank" rel="noopener">Scientific Reports 2016 ↗</a>
+                    <a href="https://www.nature.com/articles/s41565-016-0003-2" target="_blank" rel="noopener">Nature Nanotechnology 2017 ↗</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="project-card">
+                <div class="project-thumb-wrap">
+                  <img src="assets/images/projects/hsm-ad-elife.png" alt="Hyperspectral Dark-Field Microscopy in vivo tracking of nanoparticles" class="project-thumb" loading="lazy" />
+                </div>
+                <div class="project-info">
+                  <h4 class="project-title">Hyperspectral Dark-Field Microscopy (HSM-AD)</h4>
+                  <p class="project-summary">
+                    Adaptive detection and machine learning classification (SVM/k-means) of single plasmonic nanoparticles inside scattering biological tissues.
+                  </p>
+                  <div class="project-links">
+                    <a href="https://elifesciences.org/articles/16352" target="_blank" rel="noopener">eLife 2016 ↗</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="project-card">
+                <div class="project-thumb-wrap">
+                  <img src="assets/images/projects/vr-oct.png" alt="Virtual Reality Volumetric Medical Image Inspection" class="project-thumb" loading="lazy" />
+                </div>
+                <div class="project-info">
+                  <h4 class="project-title">Interactive Volumetric Medical Imaging in Virtual Reality &amp; Face Masker</h4>
+                  <p class="project-summary">
+                    Built a real-time 60 FPS volumetric 3D OCT renderer for Oculus Rift (EE 267) and an Android face detection + OpenGL dynamic illumination blending app (EE 368).
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6. Paieon Medical (Dec 2011 - Nov 2012) -->
+        <article class="tl-item">
+          <div class="tl-time">
+            <span class="tl-date">Dec 2011 – Nov 2012</span>
+          </div>
+          <div class="tl-marker">
+            <div class="tl-logo" title="Paieon Medical">
+              <img src="assets/images/logos/paieon-logo.png" alt="Paieon Medical" class="tl-logo-img" />
+            </div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-body">
+            <div class="tl-header">
+              <h3 class="tl-role">Algorithms Engineer &amp; Team Leader</h3>
+              <div class="tl-org">Paieon Medical</div>
+            </div>
+            <p class="tl-desc">
+              Closely led a small team of engineers conducting R&amp;D in computer vision, working on a product to assist in cardiac navigation procedures by creating a 3D model of the heart from two X-Ray projections.
+            </p>
+          </div>
+        </article>
+
+        <!-- 7. Tessera (Dec 2008 - Nov 2011) -->
+        <article class="tl-item">
+          <div class="tl-time">
+            <span class="tl-date">Dec 2008 – Nov 2011</span>
+          </div>
+          <div class="tl-marker">
+            <div class="tl-logo" title="Tessera">
+              <img src="assets/images/logos/tessera-icon.png" alt="Tessera" class="tl-logo-img" />
+            </div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-body">
+            <div class="tl-header">
+              <h3 class="tl-role">Algorithms Engineer &amp; Project Manager</h3>
+              <div class="tl-org">Tessera (EyeSquad)</div>
+            </div>
+            <p class="tl-desc">
+              Performed research, design, and implementation of computational imaging algorithms and created tools for image quality evaluation for cellphone cameras. Primarily developed an algorithm for Extended Depth of Field (EDoF), which was incorporated in numerous cellphones by Nokia and Samsung.
+            </p>
+            <div class="tl-projects">
+              <div class="project-card">
+                <div class="project-thumb-wrap">
+                  <img src="assets/images/projects/tessera-edof.jpg" alt="Extended Depth of Field (EDOF) computational optics at Tessera" class="project-thumb" loading="lazy" />
+                </div>
+                <div class="project-info">
+                  <h4 class="project-title">Extended Depth of Field (EDoF) via Joint Optical-Digital Design</h4>
+                  <p class="project-summary">
+                    Computational imaging algorithms and optical-digital co-design deployed across commercial Nokia and Samsung mobile phone cameras.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 8. Tel Aviv University (2005 - 2008) -->
+        <article class="tl-item">
+          <div class="tl-time">
+            <span class="tl-date">2005 – 2008</span>
+          </div>
+          <div class="tl-marker">
+            <div class="tl-logo" title="Tel Aviv University">
+              <img src="assets/images/logos/tau-seal.png" alt="Tel Aviv University" class="tl-logo-img" />
+            </div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-body">
+            <div class="tl-header">
+              <h3 class="tl-role">M.Sc. in Electrical Engineering, <em>Summa Cum Laude</em></h3>
+              <div class="tl-org">Tel Aviv University</div>
+            </div>
+            <p class="tl-desc">
+              Advised by Dr. Yael Hanein. Research on dissipative particle dynamics model of carbon nanotubes, contributing to the open-source particle dynamics simulation project SYMPLER.
+            </p>
+            <div class="tl-projects">
+              <div class="project-card">
+                <div class="project-thumb-wrap">
+                  <img src="assets/images/projects/tau-carbon-nanotubes.png" alt="Dissipative particle dynamics simulation of carbon nanotubes" class="project-thumb" loading="lazy" />
+                </div>
+                <div class="project-info">
+                  <h4 class="project-title">Dissipative Particle Dynamics Model of Carbon Nanotubes</h4>
+                  <p class="project-summary">
+                    Nanoscale particle dynamics simulation of carbon nanotube self-assembly and mechanical behavior in SYMPLER.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 9. IDF Technological Unit (Jun 2003 - Dec 2008) -->
+        <article class="tl-item">
+          <div class="tl-time">
+            <span class="tl-date">Jun 2003 – Dec 2008</span>
+          </div>
+          <div class="tl-marker">
+            <div class="tl-logo" title="Intelligence">
+              <img src="assets/images/logos/unit81.png" alt="Psagot" class="tl-logo-img" />
+            </div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-body">
+            <div class="tl-header">
+              <h3 class="tl-role">Officer (Captain), Technological Unit of the Intelligence Corps</h3>
+              <div class="tl-org">IDF</div>
+            </div>
+            <p class="tl-desc">
+              Led a team at the core of major multi-disciplinary projects in the field of electro-optics. In charge of building and testing complex systems with tight deadlines, alongside R&amp;D in electro-optics and embedded software development and system design.
+            </p>
+          </div>
+        </article>
+
+        <!-- 10. RAFAEL (Jun 2001 - Jun 2003) -->
+        <article class="tl-item">
+          <div class="tl-time">
+            <span class="tl-date">Jun 2001 – Jun 2003</span>
+          </div>
+          <div class="tl-marker">
+            <div class="tl-logo" title="RAFAEL — Advanced Defense Systems">
+              <img src="assets/images/logos/rafael-icon.png" alt="RAFAEL" class="tl-logo-img" />
+            </div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-body">
+            <div class="tl-header">
+              <h3 class="tl-role">RF Design Engineer</h3>
+              <div class="tl-org">RAFAEL Advanced Defense Systems Ltd.</div>
+            </div>
+            <p class="tl-desc">
+              Student engineer. Design of high-frequency microchips, electromagnetic simulations of distributed systems, and modeling of components.
+            </p>
+          </div>
+        </article>
+
+        <!-- 11. Technion (1999 - 2003) -->
+        <article class="tl-item">
+          <div class="tl-time">
+            <span class="tl-date">1999 – 2003</span>
+          </div>
+          <div class="tl-marker">
+            <div class="tl-logo" title="Technion — Israel Institute of Technology">
+              <img src="assets/images/logos/technion-icon.png" alt="Technion" class="tl-logo-img" />
+            </div>
+          </div>
+          <div class="tl-body">
+            <div class="tl-header">
+              <h3 class="tl-role">B.Sc. in Electrical Engineering &amp; B.A. in Physics, <em>Summa Cum Laude</em></h3>
+              <div class="tl-org">Technion &middot; Israel Institute of Technology (“Psagot” Excellence Program)</div>
+            </div>
+            <p class="tl-desc">
+              Majored in communication, wave theory, and electro-optics. Projects on numerical analysis of electromagnetic waves and high-speed fiber optic lasers.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Teaching & Speaking Section -->
+    <section class="section" id="teaching">
+      <h2 class="section-title">Teaching &amp; Speaking</h2>
+
+      <div class="teaching-grid">
+        <div class="teach-card">
+          <h3 class="teach-title">Stanford EE 367 / CS 448I: Computational Imaging and Display</h3>
+          <p class="teach-desc">
+            Head Teaching Assistant for two years during my PhD at Stanford (with Prof. Gordon Wetzstein) and invited annual guest lecturer on mobile computational photography.
+          </p>
+        </div>
+
+        <div class="teach-card">
+          <h3 class="teach-title">Grace Hopper Celebration: The Brains Behind the Camera</h3>
+          <p class="teach-desc">
+            Speaker at GHC 2019 (with Yael Pritch) on AI for computational photography on Google Pixel, covering single-camera Portrait Mode and handheld low-light photography with Night Sight.
+          </p>
+        </div>
+
+        <div class="teach-card">
+          <h3 class="teach-title">Speaker at Icon Women in Tech</h3>
+          <p class="teach-desc">
+            Featured talk on building and launching generative AI creation tools for video and photography, bridging foundational research models with products used by millions of creators.
+          </p>
+        </div>
+      </div>
+
+      <div class="videos-grid">
+        <a href="https://www.youtube.com/watch?v=kCQyT48YBuc" target="_blank" rel="noopener" class="video-card">
+          <div class="video-thumb-wrap">
+            <img src="assets/images/projects/yt-thesis-defense.jpg" alt="Orly Liba Stanford PhD Thesis Defense" class="video-thumb" loading="lazy" />
+            <div class="video-play-Btn" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3 class="video-title">Stanford Ph.D. Thesis Defense: Optical and Computational Tools for Medical Imaging</h3>
+            <p class="video-desc">
+              Full recording of my doctoral defense at Stanford University covering Speckle-Modulating OCT, MOZART gold nanorod contrast agents, and hyperspectral dark-field microscopy.
+            </p>
+          </div>
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=IeJgbkDZHHM" target="_blank" rel="noopener" class="video-card">
+          <div class="video-thumb-wrap">
+            <img src="assets/images/projects/yt-nostalgia-stanford.jpg" alt="Stanford Mechanical Engineering Nostalgia Video" class="video-thumb" loading="lazy" />
+            <div class="video-play-Btn" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="video-body">
+            <h3 class="video-title">From the Archives: Stanford Grad School Nostalgia</h3>
+            <p class="video-desc">
+              A lighthearted throwback video from my Stanford PhD days in the lab.
+            </p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Hobbies Section -->
+    <section class="section" id="hobbies">
+      <h2 class="section-title">Hobbies</h2>
+
+      <div class="hobbies-grid">
+        <!-- Running Card with Auto-Advancing Carousel -->
+        <div class="hobby-card">
+          <div class="carousel" data-carousel data-interval="2200">
+            <div class="carousel-track">
+              <!-- Add more running photos here by adding <img class="carousel-slide" src="assets/images/hobbies/your-photo.jpg" alt="..." /> -->
+              <img src="assets/images/hobbies/javelina-100k.jpg" alt="Running the Javelina Jundred 100K in Arizona" class="carousel-slide active" loading="lazy" />
+              <img src="assets/images/hobbies/JDP_MTF_26k-2145.jpg" alt="Mammoth Triple" class="carousel-slide active" loading="lazy" />
+              <img src="assets/images/hobbies/PXL_20260824_185004213.jpg" alt="Whitney summit" class="carousel-slide active" loading="lazy" />
+            </div>
+            <button class="carousel-btn prev" aria-label="Previous running photo">&#8249;</button>
+            <button class="carousel-btn next" aria-label="Next running photo">&#8250;</button>
+            <div class="carousel-dots"></div>
+          </div>
+          <div class="hobby-body">
+            <h3 class="hobby-title">Running</h3>
+            <p class="hobby-desc">
+              A determined mid-packer, exploring trails and distances from 5Ks to 100Ks and hopefully one day 100 miles.
+            </p>
+          </div>
+        </div>
+
+        <!-- Painting Card with Auto-Advancing Carousel -->
+        <div class="hobby-card">
+          <div class="carousel" data-carousel data-interval="false">
+            <div class="carousel-track">
+              <img src="assets/images/hobbies/painting-easel-1.jpg" alt="Painting at the easel with finished canvases on the wall" class="carousel-slide active" loading="lazy" />
+              <img src="assets/images/hobbies/painting-easel-3.jpg" alt="At the easel painting a horse and rider" class="carousel-slide" loading="lazy" />
+              <img src="assets/images/hobbies/painting-easel-5.jpg" alt="Focused at the easel" class="carousel-slide" loading="lazy" />
+              <img src="assets/images/hobbies/painting-easel-6.jpg" alt="Drawing a beach scene with pastels" class="carousel-slide" loading="lazy" />
+              <img src="assets/images/hobbies/painting-canvas-1.jpg" alt="Oil painting of sunset sea cliff and boats" class="carousel-slide" loading="lazy" />
+              <img src="assets/images/hobbies/painting-canvas-2.jpg" alt="Acrylic painting of alpine mountain lake" class="carousel-slide" loading="lazy" />
+              <img src="assets/images/hobbies/painting-canvas-5.jpg" alt="Painting of a monarch butterfly" class="carousel-slide" loading="lazy" />
+              <img src="assets/images/hobbies/IMG_9762.jpg" alt="kids on beach" class="carousel-slide" loading="lazy" />
+              <img src="assets/images/hobbies/P1000415.jpg" alt="Thailand" class="carousel-slide" loading="lazy" />
+              <img src="assets/images/hobbies/P1000415.jpg" alt="Woman with Dali dog" class="carousel-slide" loading="lazy" />
+              <img src="assets/images/hobbies/IMG_7486.jpg" alt="Horses" class="carousel-slide" loading="lazy" />
+            </div>
+            <button class="carousel-btn prev" aria-label="Previous painting photo">&#8249;</button>
+            <button class="carousel-btn next" aria-label="Next painting photo">&#8250;</button>
+            <div class="carousel-dots"></div>
+          </div>
+          <div class="hobby-body">
+            <h3 class="hobby-title">Painting</h3>
+            <p class="hobby-desc">
+              Painting landscapes, portraits, and studies of light and color in oils, acrylics, and pastels.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Image Lightbox Modal -->
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image preview">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close preview">&times;</button>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+
+  <script src="script.js?v=5"></script>
+</body>
+</html>

@@ -340,6 +340,25 @@ a:hover {
   flex-direction: column;
 }
 
+.teach-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.teach-card-header .teach-title {
+  margin-bottom: 0;
+}
+
+.teach-logo {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  flex-shrink: 0;
+  display: block;
+}
+
 .teach-title {
   font-size: 16px;
   font-weight: 700;
@@ -352,6 +371,10 @@ a:hover {
   font-size: 14.5px;
   color: var(--text-secondary);
   line-height: 1.55;
+}
+
+.teach-desc + .teach-desc {
+  margin-top: 8px;
 }
 
 .videos-grid {
@@ -460,6 +483,7 @@ a:hover {
   position: relative;
 }
 
+.carousel-track img,
 .carousel-slide {
   position: absolute;
   inset: 0;
@@ -474,9 +498,11 @@ a:hover {
   cursor: zoom-in;
 }
 
+.carousel-track img.active,
 .carousel-slide.active {
   opacity: 1;
   pointer-events: auto;
+  z-index: 2;
 }
 
 .carousel-btn {

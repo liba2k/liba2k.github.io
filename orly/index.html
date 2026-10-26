@@ -353,6 +353,25 @@
       flex-direction: column;
     }
 
+    .teach-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .teach-card-header .teach-title {
+      margin-bottom: 0;
+    }
+
+    .teach-logo {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+      flex-shrink: 0;
+      display: block;
+    }
+
     .teach-title {
       font-size: 16px;
       font-weight: 700;
@@ -365,6 +384,10 @@
       font-size: 14.5px;
       color: var(--text-secondary);
       line-height: 1.55;
+    }
+
+    .teach-desc + .teach-desc {
+      margin-top: 8px;
     }
 
     .videos-grid {
@@ -790,7 +813,7 @@
             <div class="tl-projects">
               <div class="project-card">
                 <div class="project-thumb-wrap">
-                  <img src="assets/images/projects/gemini-omni.svg" alt="Gemini Omni launch at Google I/O for YouTube Shorts" class="project-thumb" loading="lazy" />
+                  <img src="assets/images/projects/gemini-omni.png" alt="Gemini Omni launch at Google I/O for YouTube Shorts" class="project-thumb" loading="lazy" />
                 </div>
                 <div class="project-info">
                   <h4 class="project-title">Gemini Omni</h4>
@@ -1165,23 +1188,55 @@
 
       <div class="teaching-grid">
         <div class="teach-card">
-          <h3 class="teach-title">Stanford EE 367 / CS 448I: Computational Imaging and Display</h3>
+          <div class="teach-card-header">
+            <img src="assets/images/logos/stanford.png" alt="Stanford University" class="teach-logo" loading="lazy" />
+            <h3 class="teach-title">Stanford EE 367 / CS 448I: Computational Imaging and Display</h3>
+          </div>
           <p class="teach-desc">
-            Head Teaching Assistant for two years during my PhD at Stanford (with Prof. Gordon Wetzstein) and invited annual guest lecturer on mobile computational photography.
+            Head Teaching Assistant for two years during my PhD at Stanford (<a href="https://web.stanford.edu/class/ee367/" target="_blank" rel="noopener">EE 367 / CS 448I</a>, with Prof. Gordon Wetzstein) and invited annual guest lecturer.
+          </p>
+          <p class="teach-desc">
+            Also an invited recurring guest lecturer for <a href="https://www.laurawaller.com/teaching/" target="_blank" rel="noopener">UC Berkeley’s Computational Imaging course</a> (with Prof. Laura Waller).
           </p>
         </div>
 
         <div class="teach-card">
-          <h3 class="teach-title">Grace Hopper Celebration: The Brains Behind the Camera</h3>
+          <div class="teach-card-header">
+            <img src="assets/images/logos/stanford.png" alt="Stanford University" class="teach-logo" loading="lazy" />
+            <h3 class="teach-title">Stanford SCIEN Seminar: Advancing Computational Photography</h3>
+          </div>
           <p class="teach-desc">
-            Speaker at GHC 2019 (with Yael Pritch) on AI for computational photography on Google Pixel, covering single-camera Portrait Mode and handheld low-light photography with Night Sight.
+            <a href="https://scien.stanford.edu/index.php/event/orly-liba-google/" target="_blank" rel="noopener">Invited talk</a> at the Stanford Center for Image Systems Engineering (2022).
           </p>
         </div>
 
         <div class="teach-card">
-          <h3 class="teach-title">Speaker at Icon Women in Tech</h3>
+          <div class="teach-card-header">
+            <img src="assets/images/logos/cvpr-cvf.png" alt="CVPR / Computer Vision Foundation" class="teach-logo" loading="lazy" />
+            <h3 class="teach-title">CVPR Workshop: Computational Photography in Very Low Light</h3>
+          </div>
           <p class="teach-desc">
-            Featured talk on building and launching generative AI creation tools for video and photography.
+            <a href="https://www.youtube.com/watch?v=oxnZNSqCivE" target="_blank" rel="noopener">Invited talk</a> at the <a href="https://ccd2020.cms.caltech.edu/" target="_blank" rel="noopener">CVPR 2020 Workshop on Computational Cameras and Displays (CCD)</a>.
+          </p>
+        </div>
+
+        <div class="teach-card">
+          <div class="teach-card-header">
+            <img src="assets/images/logos/ghc-logo.png" alt="Grace Hopper Celebration" class="teach-logo" loading="lazy" />
+            <h3 class="teach-title">Grace Hopper Celebration: The Brains Behind the Camera</h3>
+          </div>
+          <p class="teach-desc">
+            Speaker at GHC 2019 (with Yael Pritch) on AI for computational photography on Google Pixel.
+          </p>
+        </div>
+
+        <div class="teach-card">
+          <div class="teach-card-header">
+            <img src="assets/images/logos/icon-sv.png" alt="ICON Silicon Valley" class="teach-logo" loading="lazy" />
+            <h3 class="teach-title">Speaker at Icon Women in Tech</h3>
+          </div>
+          <p class="teach-desc">
+            Featured talk (Nov 2024) on building and launching creation tools for GenAI video generation in YouTube.
           </p>
         </div>
       </div>
@@ -1233,8 +1288,8 @@
               <img src="assets/images/hobbies/JDP_MTF_26k-2145.jpg" alt="Mammoth Triple" class="carousel-slide" loading="lazy" />
               <img src="assets/images/hobbies/PXL_20260824_185004213.jpg" alt="Whitney summit" class="carousel-slide" loading="lazy" />
             </div>
-            <button class="carousel-btn prev" aria-label="Previous running photo">&#8249;</button>
-            <button class="carousel-btn next" aria-label="Next running photo">&#8250;</button>
+            <button type="button" class="carousel-btn prev" aria-label="Previous running photo">&#8249;</button>
+            <button type="button" class="carousel-btn next" aria-label="Next running photo">&#8250;</button>
             <div class="carousel-dots"></div>
           </div>
           <div class="hobby-body">
@@ -1259,8 +1314,8 @@
               <img src="assets/images/hobbies/IMG_8202.JPG" alt="Woman with Dali dog" class="carousel-slide" loading="lazy" />
               <img src="assets/images/hobbies/IMG_7486.jpg" alt="Horses" class="carousel-slide" loading="lazy" />
             </div>
-            <button class="carousel-btn prev" aria-label="Previous painting photo">&#8249;</button>
-            <button class="carousel-btn next" aria-label="Next painting photo">&#8250;</button>
+            <button type="button" class="carousel-btn prev" aria-label="Previous painting photo">&#8249;</button>
+            <button type="button" class="carousel-btn next" aria-label="Next painting photo">&#8250;</button>
             <div class="carousel-dots"></div>
           </div>
           <div class="hobby-body">
